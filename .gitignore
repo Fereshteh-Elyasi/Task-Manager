@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+vendor/
+
+# Environment
+.env
+.env.backup
+.env.production
+
+# Laravel
+/BackEnd/bootstrap/cache/*.php
+/BackEnd/storage/*.key
+/BackEnd/storage/logs/*
+/BackEnd/storage/framework/cache/*
+/BackEnd/storage/framework/sessions/*
+/BackEnd/storage/framework/views/*
+/BackEnd/database/*.sqlite
+
+# Frontend
+/FrontEnd/dist/
+/FrontEnd/node_modules/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-error.log*
