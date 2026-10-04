@@ -4,6 +4,34 @@
 
 ---
 
+## شروع سریع
+
+دو ترمینال باز کنید:
+
+**ترمینال ۱ — بک‌اند**
+
+```bash
+cd BackEnd
+composer install
+cp .env.example .env
+php artisan key:generate
+touch database/database.sqlite
+php artisan migrate
+php artisan serve
+```
+
+**ترمینال ۲ — فرانت‌اند**
+
+```bash
+cd FrontEnd
+npm install
+npm run dev
+```
+
+سپس مرورگر را روی آدرس Vite (معمولاً `http://localhost:5173`) باز کنید. بک‌اند روی `http://127.0.0.1:8000` است.
+
+---
+
 ## ویژگی‌ها
 
 - بورد کانبان با قابلیت درگ‌اند‌دراپ (Drag & Drop)
@@ -25,16 +53,7 @@
 ```text
 Task-Manager/
 ├── BackEnd/          # API لاراول
-│   ├── app/
-│   ├── routes/
-│   ├── database/
-│   ├── config/
-│   ├── .env.example
-│   └── composer.json
 ├── FrontEnd/         # فرانت React (Vite)
-│   ├── src/
-│   ├── package.json
-│   └── vite.config.js
 ├── .gitignore
 └── README.md
 ```
@@ -57,34 +76,16 @@ Task-Manager/
 
 ```bash
 cd BackEnd
-
-# نصب وابستگی‌ها
 composer install
-
-# ساخت فایل محیط
 cp .env.example .env
-
-# تولید کلید اپلیکیشن
 php artisan key:generate
-
-# ساخت دیتابیس SQLite (در صورت استفاده از SQLite)
 touch database/database.sqlite
-
-# اجرای مایگریشن‌ها
 php artisan migrate
-
-# (اختیاری) اجرای سیدر برای داده نمونه
-php artisan db:seed
-
-# اجرای سرور
+php artisan db:seed   # اختیاری
 php artisan serve
 ```
 
-API روی آدرس زیر در دسترس خواهد بود:
-
-```text
-http://127.0.0.1:8000
-```
+API: `http://127.0.0.1:8000`
 
 ---
 
@@ -92,19 +93,13 @@ http://127.0.0.1:8000
 
 ```bash
 cd FrontEnd
-
-# نصب وابستگی‌ها
 npm install
-
-# اجرای حالت توسعه
 npm run dev
 ```
 
-فرانت معمولاً روی پورت Vite (مثلاً `http://localhost:5173`) بالا می‌آید.
+> پروکسی Vite درخواست‌های `/api` را به لاراول می‌فرستد؛ بک‌اند باید روشن باشد.
 
-> پروکسی Vite طوری تنظیم شده که درخواست‌های `/api` به بک‌اند لاراول (`http://127.0.0.1:8000`) هدایت شوند. پس حتماً بک‌اند باید روشن باشد.
-
-### ساخت نسخه نهایی (Production)
+ساخت نسخه نهایی:
 
 ```bash
 npm run build
@@ -114,94 +109,49 @@ npm run build
 
 ## تنظیمات محیط (.env)
 
-در پوشه `BackEnd` فایل `.env` را از روی `.env.example` بسازید و مقادیر مهم را تنظیم کنید:
-
 ```env
 APP_NAME=Taskflow
 APP_URL=http://127.0.0.1:8000
-
 DB_CONNECTION=sqlite
-# یا برای MySQL:
-# DB_CONNECTION=mysql
-# DB_HOST=127.0.0.1
-# DB_PORT=3306
-# DB_DATABASE=taskflow
-# DB_USERNAME=root
-# DB_PASSWORD=
-
 SANCTUM_STATEFUL_DOMAINS=localhost,127.0.0.1
 ```
+
+برای MySQL به‌جای SQLite، مقادیر `DB_*` را در `.env` تنظیم کنید.
 
 ---
 
 ## API اصلی
 
-همه روت‌های زیر (به‌جز register و login) نیاز به احراز هویت Sanctum دارند.
+مسیرهای احراز هویت‌شده نیاز به توکن Sanctum دارند.
 
-### احراز هویت
 | متد | مسیر | توضیح |
 |-----|------|--------|
 | POST | `/api/auth/register` | ثبت‌نام |
 | POST | `/api/auth/login` | ورود |
-| POST | `/api/auth/logout` | خروج |
-| GET | `/api/auth/me` | اطلاعات کاربر فعلی |
-
-### پروژه‌ها
-| متد | مسیر | توضیح |
-|-----|------|--------|
 | GET | `/api/projects` | لیست پروژه‌ها |
 | POST | `/api/projects` | ایجاد پروژه |
 | PATCH | `/api/projects/{id}` | ویرایش پروژه |
-| DELETE | `/api/projects/{id}` | حذف پروژه |
-| GET | `/api/projects/{id}/board` | دریافت بورد پروژه |
-
-### ستون‌ها و تسک‌ها
-| متد | مسیر | توضیح |
-|-----|------|--------|
-| POST | `/api/projects/{id}/columns` | ایجاد ستون |
-| PATCH | `/api/columns/{id}` | ویرایش ستون |
-| DELETE | `/api/columns/{id}` | حذف ستون |
+| GET | `/api/projects/{id}/board` | بورد پروژه |
 | POST | `/api/columns/{id}/tasks` | ایجاد تسک |
-| GET | `/api/tasks/{id}` | جزئیات تسک |
 | PATCH | `/api/tasks/{id}` | ویرایش تسک |
-| DELETE | `/api/tasks/{id}` | حذف تسک |
 
-### سایر
-| متد | مسیر | توضیح |
-|-----|------|--------|
-| POST | `/api/tasks/{id}/checklist` | افزودن آیتم چک‌لیست |
-| POST | `/api/tasks/{id}/comments` | افزودن کامنت |
-| POST | `/api/tasks/{id}/attachments` | آپلود پیوست |
-| GET/POST | `/api/projects/{id}/labels` | برچسب‌ها |
-| GET/POST | `/api/projects/{id}/members` | اعضای پروژه |
-| POST | `/api/users/invite` | دعوت کاربر |
+جزئیات بیشتر روت‌ها در `BackEnd/routes/api.php` است.
 
 ---
 
 ## تکنولوژی‌ها
 
-**بک‌اند**
-- Laravel ۱۳
-- Laravel Sanctum (احراز هویت API)
-- PHP ۸.۳+
-
-**فرانت‌اند**
-- React ۱۹
-- Vite ۸
-- @dnd-kit (درگ‌اند‌دراپ)
-- jalaali-js (تقویم جلالی)
+**بک‌اند:** Laravel ۱۳ · Sanctum · PHP ۸.۳+  
+**فرانت‌اند:** React ۱۹ · Vite ۸ · @dnd-kit · jalaali-js
 
 ---
 
 ## نکات مهم
 
-1. فولدرهای `vendor` و `node_modules` در ریپو نیستند؛ باید با `composer install` و `npm install` نصب شوند.
-2. فایل `.env` را هرگز در گیت کامیت نکنید.
-3. برای استفاده از MySQL به‌جای SQLite، تنظیمات دیتابیس را در `.env` تغییر دهید و سپس `php artisan migrate` را اجرا کنید.
-4. در محیط Production مقدار `APP_DEBUG` را `false` بگذارید و `APP_KEY` را امن نگه دارید.
+1. `vendor` و `node_modules` در ریپو نیستند؛ با `composer install` و `npm install` نصب شوند.
+2. فایل `.env` را کامیت نکنید.
+3. در Production مقدار `APP_DEBUG=false` بگذارید.
 
 ---
 
-## مجوز
-
-این پروژه تحت مجوز MIT منتشر شده است.
+مجوز: MIT
