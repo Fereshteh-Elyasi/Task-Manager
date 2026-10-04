@@ -1,0 +1,69 @@
+.inbox-page {
+  padding: 22px 28px 40px;
+  max-width: 700px;
+}
+
+.inbox-page__title {
+  margin: 0 0 16px;
+  font-size: 20px;
+  color: var(--ink);
+}
+
+.inbox-page__empty {
+  color: var(--ink-faint);
+  font-size: 13px;
+}
+
+.inbox-page__section {
+  margin-bottom: 18px;
+}
+
+.inbox-page__section-title {
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--ink-faint);
+  margin: 0 0 8px;
+}
+
+.inbox-page__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  text-align: right;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 10px;
+  padding: 11px 13px;
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.7;
+}
+
+.inbox-page__item:hover {
+  border-color: var(--violet);
+}
+
+.inbox-page__icon {
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+.inbox-page__avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.inbox-page__item-text b {
+  color: var(--ink);
+}

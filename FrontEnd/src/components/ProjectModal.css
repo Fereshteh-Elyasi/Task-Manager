@@ -1,0 +1,110 @@
+.project-modal__backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 19, 48, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 30;
+  padding: 16px;
+}
+
+.project-modal {
+  width: min(360px, 100%);
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 20px 20px 22px;
+}
+
+.project-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.project-modal__header h2 {
+  margin: 0;
+  font-size: 16px;
+  color: var(--ink);
+}
+
+.project-modal__close {
+  background: none;
+  border: none;
+  font-size: 20px;
+  line-height: 1;
+  color: var(--ink-soft);
+}
+
+.project-modal__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+  font-size: 12.5px;
+  color: var(--ink-soft);
+}
+
+.project-modal__field input,
+.project-modal__field select {
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 9px 11px;
+  font-size: 13.5px;
+  color: var(--ink);
+  outline: none;
+}
+
+.project-modal__field input:focus,
+.project-modal__field select:focus {
+  border-color: var(--violet);
+}
+
+.project-modal__icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.project-modal__icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--ink-soft);
+  font-size: 14px;
+}
+
+.project-modal__icon.is-active {
+  border-color: var(--violet);
+  background: var(--violet-soft);
+  color: var(--violet-dark);
+}
+
+.project-modal__submit {
+  width: 100%;
+  border: none;
+  background: var(--violet);
+  color: #fff;
+  font-weight: 700;
+  font-size: 13.5px;
+  padding: 10px;
+  border-radius: 9px;
+  margin-top: 4px;
+}
+
+.project-modal__submit:hover {
+  background: var(--violet-dark);
+}
+
+.project-modal__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.project-modal__icon svg {
+  display: block;
+}
